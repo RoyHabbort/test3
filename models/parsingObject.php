@@ -41,7 +41,7 @@ class parsingObject {
     public function getAllTags(){
         
         //извлекаем из кода страницы все теги
-        if(!$this->tags){
+        if(!$this->_tags){
             $this->_tags = $this->_extracte_tags($this->_data);
         }
         
