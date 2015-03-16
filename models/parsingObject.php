@@ -14,7 +14,7 @@
 class parsingObject {
     
     private $_data = string;
-    private $_tags = string;
+    private $_tags = array();
     
     //при создании объекта, сразу считываем данные html со страницы
     function __construct($url){
@@ -41,17 +41,19 @@ class parsingObject {
     public function getAllTags(){
         
         //извлекаем из кода страницы все теги
-        $allTags = $this->_extracte_tags($this->_data);
+        if(!$this->tags){
+            $this->_tags = $this->_extracte_tags($this->_data);
+        }
         
         //если тегов не найдено, возвращаем null
-        if(empty($allTags)){
+        if(empty($this->_tags)){
             return null;
         }
         
         //Перебираем все теги формируя результирующий массив
         //содержащий название тега, и кол-во его вхождений
         $result = array();
-        foreach($allTags as $key => $value){
+        foreach($this->_tags as $key => $value){
             if(!$result[$value]){
                 $result[$value] = array(
                     'name' => $value,
